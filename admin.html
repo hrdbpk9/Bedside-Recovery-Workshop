@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — Bedside Recovery Workshop | BPK9</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <div class="brand">
+      <div class="mark"><span></span></div>
+      <div class="brand-text">
+        <div class="title">Admin</div>
+        <div class="sub">Bedside Recovery Workshop · BPK9</div>
+      </div>
+    </div>
+    <div>
+      <a href="index.html" class="btn ghost small-btn" style="text-decoration:none;color:#EAF3F1;border-color:rgba(255,255,255,.4);">← กลับหน้าหลัก</a>
+    </div>
+  </div>
+</header>
+
+<!-- ===================== LOGIN ===================== -->
+<div id="login-shell" class="login-shell">
+  <div class="card login-card">
+    <h2>เข้าสู่ระบบผู้ดูแล</h2>
+    <div id="login-error" class="msg error hidden"></div>
+    <div style="margin-top:12px;">
+      <label for="login-user">User</label>
+      <input type="text" id="login-user" placeholder="HR" onkeydown="if(event.key==='Enter')tryLogin()">
+    </div>
+    <div style="margin-top:12px;">
+      <label for="login-pass">Password</label>
+      <input type="password" id="login-pass" placeholder="••••" onkeydown="if(event.key==='Enter')tryLogin()">
+    </div>
+    <button class="btn block" style="margin-top:18px;" onclick="tryLogin()">เข้าสู่ระบบ</button>
+  </div>
+</div>
+
+<!-- ===================== ADMIN CONTENT ===================== -->
+<div id="admin-shell" class="wrap hidden" style="padding:24px 20px 60px;">
+  <div id="admin-banner" class="msg hidden"></div>
+
+  <div class="admin-actions">
+    <div class="grid cols-3" style="flex:1;">
+      <div class="card kpi" style="padding:14px 18px;">
+        <div class="num" id="summary-total" style="font-size:1.5rem;">—</div>
+        <div class="label">กลุ่มเป้าหมาย</div>
+      </div>
+      <div class="card kpi" style="padding:14px 18px;">
+        <div class="num" id="summary-registered" style="font-size:1.5rem;">—</div>
+        <div class="label">ลงทะเบียนแล้ว</div>
+      </div>
+      <div class="card kpi" style="padding:14px 18px;">
+        <div class="num" id="summary-pct" style="font-size:1.5rem;">—</div>
+        <div class="label">% ความคืบหน้า</div>
+      </div>
+    </div>
+    <button class="btn ghost small-btn" onclick="logout()">ออกจากระบบ</button>
+  </div>
+
+  <div class="card">
+    <h2>เพิ่มรายชื่อกลุ่มเป้าหมาย</h2>
+    <p style="color:var(--ink-soft);margin-top:-6px;">ค้นหาจากฐานข้อมูลพนักงานทั้งหมด แล้วเลือกเพิ่มเข้ากลุ่มเป้าหมาย Workshop</p>
+    <div class="field-row">
+      <div class="autocomplete">
+        <label for="add-emp-search">ค้นหาชื่อหรือรหัสพนักงาน</label>
+        <input type="text" id="add-emp-search" placeholder="พิมพ์ชื่อหรือรหัสพนักงาน" oninput="onEmployeeSearchInput()">
+        <div id="add-emp-suggestions" class="autocomplete-list hidden"></div>
+      </div>
+      <button id="add-emp-btn" class="btn amber" disabled onclick="addTargetEmployee()">เพิ่มเข้ากลุ่มเป้าหมาย</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:center;">
+      <h2 style="margin:0;">รายชื่อกลุ่มเป้าหมายทั้งหมด</h2>
+      <span class="pill" id="target-count-pill">—</span>
+    </div>
+    <div id="target-table" style="margin-top:14px;overflow:auto;"></div>
+  </div>
+
+  <div class="card">
+    <h2>จำนวนเป้าหมายต่อหน่วยงาน</h2>
+    <p style="color:var(--ink-soft);margin-top:-6px;">ค่าเริ่มต้นคำนวณจากจำนวนรายชื่อในหน่วยงานนั้น — แก้ไขได้หากจำนวนจริงต่างจากรายชื่อที่มี</p>
+    <div id="dept-override-table" style="margin-top:14px;overflow:auto;"></div>
+  </div>
+</div>
+
+<footer>
+  ศูนย์พัฒนาคุณภาพ / HR / ฝ่ายการพยาบาล — โรงพยาบาลบางปะกอก 9 อินเตอร์เนชั่นแนล
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/gas.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>
